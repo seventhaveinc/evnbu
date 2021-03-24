@@ -151,6 +151,16 @@
         "signature": "8457454e330635e0c12d0a1ae6672f2ef5624dbe11d132531fec031dd484e5eb",
         "affectsGlobalScope": false
       },
+      "../src/eventbus.ts": {
+        "version": "e71e9de4d3b5f6567cba8935416fa65233ea7fc3a82d27a6710fa6fded617e09",
+        "signature": "e104ec0369a66a578929037105b72861030d6ab7fa8ec24f147d89adfcb22968",
+        "affectsGlobalScope": false
+      },
+      "../src/index.ts": {
+        "version": "f9b8fab0d7774e3ff6f727622493f1c56e2a1f1f91f4250181d0241419940434",
+        "signature": "06cd32a703ca7a69ab6c77e200abc2f90f6538e5de8284983c77420b98396fee",
+        "affectsGlobalScope": false
+      },
       "../node_modules/@types/node/globals.d.ts": {
         "version": "25b4a0c4fab47c373ee49df4c239826ee3430019fc0c1b5e59edc3e398b7468d",
         "signature": "25b4a0c4fab47c373ee49df4c239826ee3430019fc0c1b5e59edc3e398b7468d",
@@ -392,6 +402,7 @@
       "target": 1,
       "module": 1,
       "sourceMap": true,
+      "outDir": "../lib",
       "esModuleInterop": true,
       "strict": true,
       "watch": true,
@@ -627,6 +638,16 @@
         "../node_modules/@types/node/zlib.d.ts"
       ],
       "../src/channel.ts": [
+        "../src/streamer.ts",
+        "../src/topic.ts"
+      ],
+      "../src/eventbus.ts": [
+        "../src/channel.ts",
+        "../src/streamer.ts"
+      ],
+      "../src/index.ts": [
+        "../src/channel.ts",
+        "../src/eventbus.ts",
         "../src/streamer.ts",
         "../src/topic.ts"
       ],
@@ -870,6 +891,15 @@
         "../src/streamer.ts",
         "../src/topic.ts"
       ],
+      "../src/eventbus.ts": [
+        "../src/channel.ts"
+      ],
+      "../src/index.ts": [
+        "../src/channel.ts",
+        "../src/eventbus.ts",
+        "../src/streamer.ts",
+        "../src/topic.ts"
+      ],
       "../src/streamer.ts": [
         "../node_modules/@types/node/events.d.ts"
       ],
@@ -952,6 +982,8 @@
       "../node_modules/@types/node/worker_threads.d.ts",
       "../node_modules/@types/node/zlib.d.ts",
       "../src/channel.ts",
+      "../src/eventbus.ts",
+      "../src/index.ts",
       "../src/streamer.ts",
       "../src/topic.ts"
     ]
