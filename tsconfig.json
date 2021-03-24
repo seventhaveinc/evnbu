@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "incremental": true,
+      "tsBuildInfoFile": "./.buildcache/.tsbuildinfo",
+      "lib": ["ES2017"],
+      "declaration": true,
+      "target": "es5",
+      "module": "commonjs",
+      "sourceMap": true,
+      "esModuleInterop": true,
+      "strict": true
+    },
+    "include": ["./src/**/*"]
+  }
