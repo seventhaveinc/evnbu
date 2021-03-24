@@ -1,0 +1,24 @@
+{
+  "name": "evnbu",
+  "version": "1.0.0",
+  "description": "evnebus written on native node events",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nawilliams95/evnbu.git"
+  },
+  "keywords": [],
+  "author": "Nykarri Williams",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nawilliams95/evnbu/issues"
+  },
+  "homepage": "https://github.com/nawilliams95/evnbu#readme",
+  "devDependencies": {
+    "@types/node": "^14.14.35",
+    "typescript": "^4.2.3"
+  }
+}
