@@ -1,7 +1,10 @@
 {
   "name": "evnbu",
   "version": "1.0.0",
-  "description": "evnebus written on native node events",
+  "engines": {
+    "node:": ">=v14.5.0"
+  },
+  "description": "evnet bus written on top of native node events and added custom logging suport and queueing support.",
   "main": "lib",
   "scripts": {
     "test": "jest --verbose --coverage --no-cache",
@@ -10,7 +13,8 @@
     "format": "prettier --write \"{./src,./tests}/**/*\"",
     "fix:src": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx}\"",
     "fix:tests": "eslint --fix \"./tests/**/*.{js,jsx,ts,tsx}\"",
-    "fix": "npm-run-all -p fix:*"
+    "fix": "npm-run-all -p fix:*",
+    "build": "npm run clean && tsc"
   },
   "repository": {
     "type": "git",
