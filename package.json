@@ -1,0 +1,74 @@
+{
+  "name": "evnbu",
+  "version": "1.0.0",
+  "engines": {
+    "node:": ">=v14.5.0"
+  },
+  "description": "evnet bus written on top of native node events and added custom logging suport and queueing support.",
+  "main": "lib",
+  "scripts": {
+    "test": "jest --verbose --coverage --no-cache",
+    "test:watch": "jest --watch",
+    "clean": "del lib && del .buildcache",
+    "format": "prettier --write \"{./src,./tests}/**/*\"",
+    "fix:src": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx}\"",
+    "fix:tests": "eslint --fix \"./tests/**/*.{js,jsx,ts,tsx}\"",
+    "fix": "npm-run-all -p fix:*",
+    "build": "npm run clean && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nawilliams95/evnbu.git"
+  },
+  "keywords": [],
+  "author": "Nykarri Williams",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nawilliams95/evnbu/issues"
+  },
+  "homepage": "https://github.com/nawilliams95/evnbu#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.21",
+    "@types/node": "^14.14.35",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.4",
+    "typescript": "^4.2.3",
+    "@typescript-eslint/eslint-plugin": "^4.0.0",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^8.0.0",
+    "eslint-config-standard-with-typescript": "^20.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "jest-junit": "^12.0.0",
+    "jest-watch-typeahead": "^0.6.0",
+    "del-cli": "^3.0.1"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    },
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
+  },
+  "jest-junit": {
+    "outputDirectory": "./reports/junit",
+    "outputName": "js-test-results.xml"
+  },
+  "tests/**/*.{js,jsx,ts,tsx}": [
+    "eslint --fix",
+    "prettier --write"
+  ]
+}
