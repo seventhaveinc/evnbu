@@ -70,5 +70,10 @@
   "tests/**/*.{js,jsx,ts,tsx}": [
     "eslint --fix",
     "prettier --write"
-  ]
+  ],
+  "dependencies": {
+    "prettier": "^2.2.1",
+    "typedoc": "^0.20.35",
+    "typedoc-plugin-markdown": "^3.6.1"
+  }
 }
