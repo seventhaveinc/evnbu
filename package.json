@@ -1,5 +1,5 @@
 {
-  "name": "evnbu",
+  "name": "@zquantium95/evnbu",
   "version": "1.0.0",
   "engines": {
     "node:": ">=v14.5.0"
@@ -19,15 +19,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nawilliams95/evnbu.git"
+    "url": "git+https://github.com//seventhaveinc/evnbu.git"
   },
   "keywords": [],
   "author": "Nykarri Williams",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/nawilliams95/evnbu/issues"
+    "url": "https://github.com//seventhaveinc/evnbu/issues"
   },
-  "homepage": "https://github.com/nawilliams95/evnbu#readme",
+  "homepage": "https://github.com//seventhaveinc/evnbu#readme",
   "devDependencies": {
     "@types/jest": "^26.0.21",
     "@types/node": "^14.14.35",
