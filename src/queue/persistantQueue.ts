@@ -34,7 +34,7 @@ function PersistentQueue(this: any, filename: string, batchSize: number) {
         }
     });
 
-     this.on('stop', () => {
+    this.on('stop', () => {
         this.run = false;
     });
 
@@ -108,7 +108,15 @@ PersistentQueue.prototype.open = function () {
         });
     })
         .then(() => {
+            /***************====================
+             *  Puts the execution mode into serialized. This means that at most one statement object can execute a query
+            at a time. Other statements wait in a queue until the previous statements are executed.
+            If you call it without a function parameter, the execution mode setting is sticky and won't change until
+            the next call to Database#parallelize.
+            https://github.com/mapbox/node-sqlite3/wiki/Control-Flow#databaseserializecallback
+             ====================**************/
             this.db.serialize();
+            //*** */ Create tables if they doesnt exist //*** */
             return new Promise<void>((resolve, reject) => {
                 let query = ` 
              CREATE TABLE IF NOT EXISTS ${table} (id INTEGER PRIMARY KEY ASC AUTOINCREMENT, job TEXT) ; 
@@ -144,8 +152,10 @@ PersistentQueue.prototype.open = function () {
         })
         .then(() => countQueue(this))
         .then(() => {
+            //*** */ Load batchSize number of jobs from queue (if there are any) //*** */
             return hydrateQueue(this, this.batchSize)
                 .then(jobs => {
+                    //If no msg left, set empty to true
                     this.empty = (this.queue.length === 0);
 
                     this.emit('open', this.db);
@@ -165,6 +175,7 @@ PersistentQueue.prototype.close = function () {
     });
 };
 
+//*** */ Get the total number of jobs in the queue //*** */
 
 PersistentQueue.prototype.getLength = function () {
     return this.length;
@@ -212,6 +223,7 @@ PersistentQueue.prototype.add = function (job: any) {
     });
 };
 
+//*** */ Debvuging is off by default //*** */
 PersistentQueue.prototype.setDebug = function (debug: any) {
     this.debug = debug;
     return this;
@@ -223,13 +235,17 @@ PersistentQueue.prototype.isEmpty = function () {
     return this.empty;
 };
 
+//*** */ has the queue started to handle jobs? is it working? //*** */
+
 PersistentQueue.prototype.isStarted = function () {
     return this.run;
 };
+//*** */Is the queue's SQLite DB open?? //*** */
 
 PersistentQueue.prototype.isOpen = function () {
     return this.opened;
 };
+//*** */ Get a reference to sqlite3 Database instance //*** */
 
 PersistentQueue.prototype.getSqlite3 = function () {
     if (this.db === null)
@@ -237,19 +253,27 @@ PersistentQueue.prototype.getSqlite3 = function () {
     return this.db;
 };
 
+//*** */ Function that returns true if there is a job with 'id' still in queue, otherwise false //*** */
+
 PersistentQueue.prototype.has = function (id: any) {
+    //*** */ First search the in-memory queue  //*** */
     return new Promise((reject, resolve) => {
         for (let i = 0; i < this.queue.length; i++) {
             if (this.queue[i].id === id)
                 resolve(true);
         }
+        //*** */ Now check the on-disk queue //*** */
         this.db.get('SELECT id FROM ' + table + ' where id = ?', id, (err: any, row: any) => {
             if (err !== null)
                 reject(err);
+
+            //*** */ Return true if there is a record, otherwise return false //*** */    
             resolve(row !== undefined);
         });
     });
 };
+
+//*** */ This function returns an array of job id numbers matching the given job data in order of execution //*** */
 
 PersistentQueue.prototype.getJobIds = function (job: any) {
     return searchQueue(this, job);
@@ -258,6 +282,7 @@ PersistentQueue.prototype.getJobIds = function (job: any) {
 PersistentQueue.prototype.getFirstJobId = function (job: any) {
 
     return new Promise((resolve, reject) => {
+        //*** */ search in-memory queue first //**** */
         let jobstr = JSON.stringify(job);
         let i = this.queue.findIndex((j: { job: any; }) => {
             return (JSON.stringify(j.job) === jobstr);
@@ -266,6 +291,7 @@ PersistentQueue.prototype.getFirstJobId = function (job: any) {
             resolve(this.queue[i].id);
             return;
         }
+        //*** */ Otherwise search the rest of db queue //*** */
         searchQueue(this, job)
             .then(data => {
                 if (data === []) {
@@ -277,6 +303,7 @@ PersistentQueue.prototype.getFirstJobId = function (job: any) {
     });
 };
 
+//*** */ This function Deletes a job from the queue (if it exists) //*** */
 PersistentQueue.prototype.delete = function (id: any) {
 
     return new Promise((resolve, reject) => {
@@ -284,6 +311,8 @@ PersistentQueue.prototype.delete = function (id: any) {
             .then(() => {
                 if (this.debug) console.log('Job deleted from db');
                 this.emit('delete', { id: id });
+
+                //*** */ decreases/counts down the job length //*** */
                 this.length--;
                 resolve(id);
             })
@@ -329,6 +358,8 @@ function searchQueue(q: { debug: any; db: { all: (arg0: string, arg1: string, ar
     });
 }
 
+//*** */ This function will get the 'size' (number of records into queue array) from the DB //*** */
+
 function hydrateQueue(q: { debug: any; db: { all: (arg0: string, arg1: (err: any, jobs: any) => void) => void; }; batchSize: string; queue: any; }, size: any) {
     if (q.debug) console.log('HydrateQueue');
     return new Promise((resolve, reject) => {
@@ -345,6 +376,7 @@ function hydrateQueue(q: { debug: any; db: { all: (arg0: string, arg1: (err: any
 
             }
 
+            //*** */ this updates the queue array and converts a stored string back to object //*** */
             q.queue = jobs.map((job: { id: any; job: string; }) => {
                 try {
                     return { id: job.id, job: JSON.parse(job.job) };
@@ -359,11 +391,13 @@ function hydrateQueue(q: { debug: any; db: { all: (arg0: string, arg1: (err: any
     });
 }
 
+//*** */ This function removes the current job from the database and in-memory array//*** */
 function removeJob(q: { queue: { id: any; }[]; db: { run: (arg0: string, arg1: any, arg2: (err: any) => void) => void; }; debug: any; length: string; }, id: any) {
     if (id === undefined) {
         id = q.queue.shift().id;
     }
     else {
+        //*** */ Search queue for id and remove if exists//*** */
         for (let i = 0; i < q.queue.length; i++) {
             if (q.queue[i].id === id) {
                 q.queue.splice(i, 1);
@@ -384,7 +418,7 @@ function removeJob(q: { queue: { id: any; }[]; db: { run: (arg0: string, arg1: a
             if (err !== null)
                 reject(err);
 
-            if (this.changes)
+            if (this.changes) //*** */ Number of rows affected//*** */
                 resolve(id);
 
             reject('Job id ' + id + ' was not removed from queue');
