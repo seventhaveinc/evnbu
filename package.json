@@ -14,7 +14,8 @@
     "fix:src": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx}\"",
     "fix:tests": "eslint --fix \"./tests/**/*.{js,jsx,ts,tsx}\"",
     "fix": "npm-run-all -p fix:*",
-    "build": "npm run clean && tsc"
+    "build": "npm run clean && tsc",
+    
   },
   "repository": {
     "type": "git",
@@ -44,10 +45,16 @@
     "jest-junit": "^12.0.0",
     "jest-watch-typeahead": "^0.6.0",
     "ts-jest": "^26.5.4",
+    "typedoc": "^0.20.35",
+    "typedoc-github-wiki-theme": "^0.2.0",
+    "typedoc-plugin-markdown": "^3.6.1",
     "typescript": "^4.2.3"
   },
   "jest": {
-    "coveragePathIgnorePatterns": ["/queue/", "/logger/"],
+    "coveragePathIgnorePatterns": [
+      "/queue/",
+      "/logger/"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 80,
@@ -74,8 +81,6 @@
   ],
   "dependencies": {
     "prettier": "^2.2.1",
-    "sqlite3": "^5.0.2",
-    "typedoc": "^0.20.35",
-    "typedoc-plugin-markdown": "^3.6.1"
+    "sqlite3": "^5.0.2"
   }
 }
