@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 let table = 'queue';
 let table_count = 'queue_count';
 
-export function PersistentQueue(this: any, filename: string, batchSize: number) {
+function PersistentQueue(this: any, filename: string, batchSize: number) {
     EventEmitter.call(this);
 
     if (filename === undefined)
@@ -391,3 +391,5 @@ function removeJob(q: { queue: { id: any; }[]; db: { run: (arg0: string, arg1: a
         });
     });
 }
+
+module.exports = PersistentQueue;

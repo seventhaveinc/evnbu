@@ -1,5 +1,9 @@
+const Queue =  require('./queue/persistantQueue')
+const Logger = require('./logger/logger')
+
 export * from './streamer'
 export * from './eventBus'
 export * from './channel'
 export * from './topic'
-export * from './logger/logger'
+export {Logger}
+export {Queue}

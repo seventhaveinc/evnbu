@@ -44,10 +44,10 @@
     "jest-junit": "^12.0.0",
     "jest-watch-typeahead": "^0.6.0",
     "ts-jest": "^26.5.4",
-    "ts-migrate": "^0.1.16",
     "typescript": "^4.2.3"
   },
   "jest": {
+    "coveragePathIgnorePatterns": ["/queue/", "/logger/"],
     "coverageThreshold": {
       "global": {
         "branches": 80,
