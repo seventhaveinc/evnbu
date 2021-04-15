@@ -1,4 +1,5 @@
-declare var global: any;
+ //*** */ This helps to avoid TypeScript errors when trying to access global variables not in the current scope //*** */
+ declare let global: any;
 const process = global?.process;
 const window = global?.window;
 const document = global?.document;
@@ -6,13 +7,13 @@ const navigator = global?.navigator;
 
 
 export enum LogLevels {
-  SILLY = 0,
-  DEBUG = 1,
-  INFO = 2,
-  WARN = 3,
-  ERROR = 4,
-  CRITICAL = 5,
-  NONE = 99
+  SILLY = 0, //Lowest debug level; This will not be logged unless explicitly enabled
+  DEBUG = 1, // Debug messages for dev env
+  INFO = 2, //Info messages will be logged in pro env by default
+  WARN = 3, // Warning about a potential issue or an expected error occured
+  ERROR = 4, // An unexpected error occurred
+  CRITICAL = 5, //Critical application error that cannot be recovered
+  NONE = 99 // to turn off logging
 }
 
 export const LogLevelNames: { [key in LogLevels]: string } = {
@@ -144,16 +145,6 @@ export class Logger {
   static get isNode(): boolean {
     // Note that Webpack et al are often adding process, module, require, etc.
     return typeof process === "object" && typeof process.env === "object" && !Logger.isBrowser;
-  }
-
-
-  static get isElectron(): boolean {
-    const userAgent = navigator?.userAgent?.toLowerCase();
-    if (userAgent.includes(" electron/")) {
-      // Test for Electron in case no Node.js environment is loaded
-      return true;
-    }
-    return Logger.isNode && typeof process?.versions?.electron !== "undefined";
   }
 
   
