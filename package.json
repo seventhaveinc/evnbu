@@ -14,7 +14,7 @@
     "fix:src": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx}\"",
     "fix:tests": "eslint --fix \"./tests/**/*.{js,jsx,ts,tsx}\"",
     "fix": "npm-run-all -p fix:*",
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc"
     
   },
   "repository": {
