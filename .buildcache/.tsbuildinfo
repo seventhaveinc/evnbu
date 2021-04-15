@@ -137,7 +137,7 @@
         "affectsGlobalScope": true
       },
       "../src/streamer.ts": {
-        "version": "b061f08b1ed965942b355226f82488e9f79ed4393e5f7e2ea72965a90d01e823",
+        "version": "829f96bc6ebb7284f0ac84d53e37fb4bbef82a61cdacac066c2920bfb4983f4b",
         "signature": "b5f72db2d2e268396b9f775f25aad81815a0877cc41646b2e6d23aeddc066736",
         "affectsGlobalScope": false
       },
@@ -147,12 +147,12 @@
         "affectsGlobalScope": false
       },
       "../src/channel.ts": {
-        "version": "c4187c9464cbb70b30cad468d1049559ae0bc33b923a11804b13344777352b10",
+        "version": "02ff3193568a4dbdae5b51e52d6a660e821485e0a8523e27b33c52cbe60d7ee7",
         "signature": "8457454e330635e0c12d0a1ae6672f2ef5624dbe11d132531fec031dd484e5eb",
         "affectsGlobalScope": false
       },
       "../src/eventbus.ts": {
-        "version": "e71e9de4d3b5f6567cba8935416fa65233ea7fc3a82d27a6710fa6fded617e09",
+        "version": "7e57a6fa0f251a52fa7ec5186f16990fbe492ff5200b0a842bc615b70b7938a1",
         "signature": "e104ec0369a66a578929037105b72861030d6ab7fa8ec24f147d89adfcb22968",
         "affectsGlobalScope": false
       },
@@ -162,8 +162,13 @@
         "affectsGlobalScope": false
       },
       "../src/index.ts": {
-        "version": "cbb522ec3a58fbfacd360137cf510e59f87ca3684804ec5b56a3e20ad22354a6",
+        "version": "9ec3b8af8620ad76d6bf1d8795274241fff62b1875c38a0cca863012baa7f58c",
         "signature": "c63ead24e16c34a8bf3cbe81856e57e56b69f01d4cfcfa0a76bdbe38c3759ecd",
+        "affectsGlobalScope": false
+      },
+      "../src/queue/persistantqueue.ts": {
+        "version": "9c15a2c7ec582b5bd5678e2502d5eb96fe66ca436d1da87e3f8d95b8e4f97741",
+        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
       "../node_modules/@babel/types/lib/index.d.ts": {
@@ -856,6 +861,9 @@
         "../src/streamer.ts",
         "../src/topic.ts"
       ],
+      "../src/queue/persistantqueue.ts": [
+        "../node_modules/@types/node/events.d.ts"
+      ],
       "../src/streamer.ts": [
         "../node_modules/@types/node/events.d.ts"
       ],
@@ -1278,6 +1286,7 @@
       "../src/eventbus.ts",
       "../src/index.ts",
       "../src/logger/logger.ts",
+      "../src/queue/persistantqueue.ts",
       "../src/streamer.ts",
       "../src/topic.ts"
     ]
