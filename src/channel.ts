@@ -14,7 +14,7 @@ export class Channel extends Streamer {
   }
 
   emit(payload?: any | undefined): void {
-    var payloadData = {
+    let payloadData = {
       channel: this.name,
       topic: '*',
       payload: payload
@@ -25,7 +25,7 @@ export class Channel extends Streamer {
 
   
   topic(name: string): Topic {
-    var topic = this.topics[name]
+    let topic = this.topics[name]
     if (typeof topic === 'undefined') {
       // create new topic
       topic = this.topics[name] = new Topic(
@@ -48,7 +48,6 @@ export class Channel extends Streamer {
   
   removeTopic(name: string): boolean {
     const topic = this.topics[name]
-    /* istanbul ignore else */
     if (typeof topic !== 'undefined') {
       delete this.topics[name]
       topic.destroy()
@@ -74,7 +73,7 @@ export class Channel extends Streamer {
 
   
   destroy(): void {
-    for (var topic in this.topics) {
+    for (let topic in this.topics) {
       this.removeTopic(topic)
     }
 

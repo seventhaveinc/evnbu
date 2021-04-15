@@ -19,7 +19,7 @@ export class Streamer {
   constructor(name: string, maxListeners = 0) {
     this.emitter = new EventEmitter()
     if (typeof name === 'undefined' || name.length === 0) {
-      throw new Error('Broadcaster must have a name')
+      throw new Error('Streamer must have a name')
     }
     this._name = name
     this.emitter.setMaxListeners(maxListeners)
