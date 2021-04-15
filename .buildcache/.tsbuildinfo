@@ -167,8 +167,8 @@
         "affectsGlobalScope": false
       },
       "../src/queue/persistantqueue.ts": {
-        "version": "9c15a2c7ec582b5bd5678e2502d5eb96fe66ca436d1da87e3f8d95b8e4f97741",
-        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "version": "a0bf94043702dccd71d2c5dd19e8b0cd2a5919614354d948ac0476c330bca151",
+        "signature": "b4d4f8c2e8a94f2520eff36ec7ecb094cac962725681b6999e8b0f1f04518ba2",
         "affectsGlobalScope": false
       },
       "../node_modules/@babel/types/lib/index.d.ts": {
@@ -554,7 +554,7 @@
       "sourceMap": true,
       "outDir": "../lib",
       "esModuleInterop": true,
-      "strict": true,
+      "strict": false,
       "watch": true,
       "configFilePath": "../tsconfig.json"
     },

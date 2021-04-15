@@ -9,7 +9,7 @@
       "sourceMap": true,
       "outDir": "./lib",
       "esModuleInterop": true,
-      "strict": true
+      "strict": false
     },
     "include": ["./src/**/*"]
   }
